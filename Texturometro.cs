@@ -12,20 +12,33 @@
 *     - RH de Rotação horária, RA de Rotação Anti-horária e S de Stop
 */
 
-namespace Texturometro {
+using ClassesSuporteTexturometro;
+using LoadCellTexturometro;
+using MotorTexturometro;
+using SerialManagerTexturometro;
+using System;
+using System.Windows.Forms;
+using TesteTextuometro;
 
+namespace TexturometroClass {
+	/*
+	*Zerar Célula de Carga
+	*Zerar Encoder
+	*Teste
+	*Exportar resultados 
+	*/
 	public class Texturometro {
 		public Motor Motor;
 		public Chave SensorLS;
 		public Chave SensorLI;
-		public LoadCell CelulaDeCarga;
-		public Teste DadosDoTeste;
+        public static LoadCell CelulaDeCarga;
+        public Teste DadosDoTeste;
 		public SerialManager Serial = new SerialManager();
 		public Tabela Resultado = new Tabela();
 
-		public Texturometro(Teste teste) {
-			DadosDoTeste = teste;
-			Serial.MessageInterpreted += AtualizaSensores;
+		public Texturometro() {
+			DadosDoTeste = TesteFactoryMethod.criarTeste(TipoDeTeste.Compressao);
+            Serial.MessageInterpreted+=AtualizaSensores;
 		}
 
 		private void Texturometro_Load(object sender, EventArgs e) {

@@ -1,6 +1,10 @@
+using System;
+using System.Diagnostics;
+
 namespace EncoderMotor {
-	public class EncoderMotor {
+    public class Encoder {
         public EventHandler ValueChanged;
+        public EventHandler ZeroSeated;
 
         private int PulsosPorRotacao;
         private int Puls;
@@ -11,7 +15,7 @@ namespace EncoderMotor {
         private long CurrentTime;
         private long PreviousTime;
 
-        public EncoderMotor(int PulsosPorRotacao) {
+        public Encoder(int PulsosPorRotacao) {
             this.PulsosPorRotacao=PulsosPorRotacao;
             CurrentTime=0;
         }
@@ -49,17 +53,18 @@ namespace EncoderMotor {
             }
         }
 
-        public void TimerStart() {
+        public void Start() {
             Timer.Start();
+            CurrentTime=Timer.ElapsedMilliseconds;
         }
-        public void TimerStop() {
+        public void Stop() {
             Timer.Stop();
         }
 
         public void SetZero() {
             Rot=0;
             Puls=0;
-            //retornar pro Arduino
+            ZeroSeated.Invoke(this,EventArgs.Empty);
         }
     }
 }

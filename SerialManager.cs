@@ -1,5 +1,9 @@
-namespace SerialManager{
-public class SerialManager {
+using ClassesSuporteTexturometro;
+using System;
+using System.IO.Ports;
+
+namespace SerialManagerTexturometro{
+    public class SerialManager {
         private SerialPort serialPort;
         public EventHandler<SerialMessageArgument> MessageInterpreted;
 
@@ -94,5 +98,6 @@ public class SerialManager {
             MessageInterpreted.Invoke(this,args);
         }
         public void EnvComandoMotor(int comando,int valor) { }
+
     }
 }

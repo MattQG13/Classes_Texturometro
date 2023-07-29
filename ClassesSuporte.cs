@@ -1,10 +1,17 @@
-namespace ClassesSuporte {
+using System;
+using System.Collections.Generic;
+
+namespace ClassesSuporteTexturometro {
 	public enum Estado {
         Parado,
         CargaMax,
         DeformacaMax
     };
-    public enum TipoDeTeste { }; //?????
+    public enum TipoDeTeste {
+        Compressao,
+        Tracao,
+        CicloDuplo
+    };
 
     public class SerialMessageArgument : EventArgs {
         public string Objeto {
@@ -48,14 +55,11 @@ namespace ClassesSuporte {
                 ValueChanged.Invoke(this,EventArgs.Empty);
             }
         }
-
-
-
     }
 
     public class Coord {
-        public double X;
-        public double Y;
+        public double X { get; set; }
+        public double Y { get; set; }
 
         public Coord() {
             X=0;

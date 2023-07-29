@@ -1,49 +1,50 @@
-namespace Motor {
+using EncoderMotor;
+using System;
+
+namespace MotorTexturometro {
 	public class Motor {
 		private double Passo;
 		private double SPVel;
 		private int ModoOper;
-		private EncoderMotor Encoder;
+		private Encoder EncoderMotor;
 
-		public Motor(double PassoDoEixo) {
+		public EventHandler SPVelChanged;
+
+		public Motor(double PassoDoEixo, Encoder encoder) {
+			EncoderMotor = encoder;
 			Passo = PassoDoEixo;
 		}
 
-		//public SetValues(double Modo,double VelLin,int PulsosPorRotacao,)
-
-
 		public double VelocidadeRotacional {
 			get {
-				return Encoder.Velocidade;
+				return EncoderMotor.Velocidade;
 			}
 		}
 
 		public double VelocidadeLinear {
 			get {
-				return Encoder.Velocidade*Passo;
+				return EncoderMotor.Velocidade*Passo;
 			}
 		}
 
 		public double Posicao {
 			get {
-				return Encoder.Rotacoes*Passo;
+				return EncoderMotor.Rotacoes*Passo;
 			}
 		}
-		public void Start(double velocidade, int modo) {
+
+        public void Start(double velocidade, int modo) {
 			SPVel = velocidade;
 			ModoOper = modo;
 		}
 
 		public void ChangeVel(double velocidade) {
 			SPVel = velocidade;
-		}
+            SPVelChanged.Invoke(this,EventArgs.Empty);
+        }
 
 		public void ChangeDirection(int modo) {
 			ModoOper = modo;
-		}
-
-		private void autoControle() {
-			//Controle de velocidade
 		}
 	}
 

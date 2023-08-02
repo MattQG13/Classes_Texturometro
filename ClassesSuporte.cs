@@ -14,21 +14,11 @@ namespace ClassesSuporteTexturometro {
     };
 
     public class SerialMessageArgument : EventArgs {
-        public string Objeto {
-            get; set;
-        }
-        public string Comando {
-            get; set;
-        }
-        public double doubleValue {
-            get; set;
-        }
-        public bool boolValue {
-            get; set;
-        }
-        public int intValue {
-            get; set;
-        }
+        public string Objeto { get; set;}
+        public string Comando { get; set;}
+        public double doubleValue { get; set;}
+        public bool boolValue { get; set;}
+        public int intValue { get; set;}
     }
     /*public class SensorArgumento: EventArgs {
 		public string Objeto;
@@ -58,27 +48,30 @@ namespace ClassesSuporteTexturometro {
     }
 
     public class Coord {
-        public double X { get; set; }
-        public double Y { get; set; }
+        public double X { get; }
+        public double Y { get;}
+        public double Z { get;}
 
         public Coord() {
             X=0;
             Y=0;
+            Z=0;
         }
-        public Coord(double X,double Y) {
+        public Coord(double X,double Y, double Z) {
             this.X=X;
             this.Y=Y;
+            this.Z=Z;
         }
     }
     public class Tabela {
         private List<Coord> Table = new List<Coord>();
 
-        public void Add(double x,double y) {
-            Table.Add(new Coord(x,y));
+        public void Add(double x,double y, double z) {
+            Table.Add(new Coord(x,y,z));
         }
 
-        public void Add(Coord xy) {
-            Table.Add(xy);
+        public void Add(Coord xyz) {
+            Table.Add(xyz);
         }
 
         public List<double> GetXvalues() {
@@ -96,7 +89,12 @@ namespace ClassesSuporteTexturometro {
             }
             return list;
         }
-
+        public List<double> GetZvalues() {
+            List<double> list = new List<double>();
+            foreach(var z in Table) {
+                list.Add(z.Z);
+            }
+            return list;
+        }
     }
-    public class StaticFunc { }
 }

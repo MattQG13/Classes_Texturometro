@@ -3,6 +3,12 @@ using System.Collections.Generic;
 
 namespace TesteTextuometro {
 
+    public class CorpoDeProva{
+       public double Deformação {get;}
+       public double Altura {get; set;}
+       public Tabela Resultado {get; set;}
+     }
+
     public abstract class Teste {
         public TipoDeTeste Tipo { get; set; }
         public double VelAvancMotor { get; set; }
